@@ -2,41 +2,31 @@ extends Node
 
 var menu_scene = preload("res://scenes/menu.tscn").instantiate()
 
-#func _ready():
-	#Networking.connect("connection_failed", _on_connection_failed)
+func _ready():
+	Networking.connect('connected_to_server_success', _on_connected_to_server_success)
+	Networking.connect("connected_to_server_failed", _on_connected_to_server_failed)
+	$Connect.grab_focus()
 
 func _on_connect_pressed():
-	print('client pressed connect!')
-	var http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(_on_request_completed)
+	if $AccountName.text.is_empty():
+		$ErrorLabelTimer.start()
+		$ErrorLabel.text = "Account name is empty."
+		$ErrorLabel.show()
+	elif $AccountPassword.text.is_empty():
+		$ErrorLabelTimer.start()
+		$ErrorLabel.text = "Password is empty."
+		$ErrorLabel.show()
+	else:
+		Networking.on_connect_pressed($AccountName.text, $AccountPassword.text)
 
-	var data_to_send = {"username": "kf", "password": "Test_1234"}
-	var json = JSON.stringify(data_to_send)
-	var url = "http://localhost:3000/session"
-	var headers = ["Content-Type: application/json"]
-	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json)
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+func _on_connected_to_server_success():
+	get_tree().root.add_child(menu_scene)
+	self.queue_free()
 
-# Called when the HTTP request is completed.
-func _on_request_completed(result, response_code, headers: PackedStringArray, body):
-	#print("body: ", body)
-	var json = JSON.parse_string(body.get_string_from_utf8())
-	print(json['message'])
+func _on_connected_to_server_failed(message: String):
+	$ErrorLabelTimer.start()
+	$ErrorLabel.text = message
+	$ErrorLabel.show()
 
-	var cookie = headers.has('Set-Cookie')
-	print("cookie: ", cookie)
-
-func _on_button_2_pressed():
-	var http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(_on_request_completed)
-
-	var data_to_send = {"username": "kf", "password": "Test_1234"}
-	var json = JSON.stringify(data_to_send)
-	var url = "http://localhost:3000/account"
-	var headers = ["Content-Type: application/json"]
-	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json)
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+func _on_error_label_timer_timeout():
+	$ErrorLabel.hide()

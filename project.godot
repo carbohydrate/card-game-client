@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="card-game-client"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/login.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Networking="*res://autoload/networking.gd"
 
 [display]
 
