@@ -27,8 +27,8 @@ func on_connect_pressed(accountName: String, accountPass: String):
 		push_error('An error occurred in the HTTP request.')
 
 func _on_connect_pressed_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
-	var json = JSON.parse_string(body.get_string_from_utf8())
-	print(json['message'])
+	var data: Variant = JSON.parse_string(body.get_string_from_utf8())
+	#print(json['message'])
 
 	if (result == HTTPRequest.RESULT_SUCCESS && response_code == 200):
 		print('success')
@@ -37,9 +37,10 @@ func _on_connect_pressed_completed(result: int, response_code: int, headers: Pac
 				print('h: ', h)
 				session = h.split(':', true, 1)[1].strip_edges().split('; ')[0]
 				print('session: ', session)
+				State.account_decks = data
 				connected_to_server_success.emit()
 	else:
-		connected_to_server_failed.emit(json['message'])
+		connected_to_server_failed.emit(data['message'])
 
 #func _on_button_2_pressed():
 	#var http_request = HTTPRequest.new()

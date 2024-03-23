@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://p00kb1emd7ow"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ipp38"]
+
+[node name="Decks" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(316.25, 87.75)
+scale = Vector2(633.5, 176.5)
+texture = SubResource("CanvasTexture_ipp38")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bdvbnhja5xggr"]
+
+[node name="TestCard" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0, 142, 0, 142, 200, 0, 200)
