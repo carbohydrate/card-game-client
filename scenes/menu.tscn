@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://chvpwec2i06tk"]
+[gd_scene load_steps=2 format=3 uid="uid://chvpwec2i06tk"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_cl3hf"]
-[ext_resource type="PackedScene" uid="uid://bdvbnhja5xggr" path="res://scenes/test_card.tscn" id="2_rdfkd"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -12,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cl3hf")
 
-[node name="Button" type="Button" parent="."]
+[node name="StartGameButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,7 +24,7 @@ offset_right = 20.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Test"
+text = "START GAME!!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -41,25 +40,5 @@ grow_horizontal = 2
 layout_mode = 2
 text = "Decks"
 
-[node name="TestCard" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(142, 745)
-
-[node name="TestCard2" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(297, 745)
-
-[node name="TestCard3" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(452, 745)
-
-[node name="TestCard4" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(607, 745)
-
-[node name="TestCard5" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(762, 745)
-
-[node name="TestCard6" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(917, 745)
-
-[node name="TestCard7" parent="." instance=ExtResource("2_rdfkd")]
-position = Vector2(1072, 745)
-
+[connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/DecksButton" to="." method="_on_decks_button_pressed"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://svwjxlagth3p"]
+
+[ext_resource type="PackedScene" uid="uid://bktpg7gn5wnu6" path="res://scenes/card.tscn" id="1_tapcp"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_woeg3"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_woeg3")
+
+[node name="Card" parent="." instance=ExtResource("1_tapcp")]
+position = Vector2(960, 850)
+
+[node name="GameDropZone" type="Marker2D" parent="." groups=["drop_zones"]]
+position = Vector2(960, 540)
+
+[node name="HandDropZone" type="Marker2D" parent="." groups=["drop_zones"]]
+position = Vector2(960, 850)
+
+[node name="PlayZone" type="Marker2D" parent="."]
+position = Vector2(1794, 524)
