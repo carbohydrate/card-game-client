@@ -4,7 +4,7 @@ func _on_pressed():
 	$StartGameHTTPRequest.request_completed.connect(_on_start_game_request_completed)
 	Networking.on_start_game_pressed($StartGameHTTPRequest)
 
-func _on_start_game_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+func _on_start_game_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
 	var data: Variant = JSON.parse_string(body.get_string_from_utf8())
 	# 202, no other players here yet...
 	if (result == HTTPRequest.RESULT_SUCCESS && response_code == 202):
