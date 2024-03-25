@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://svwjxlagth3p"]
+[gd_scene load_steps=4 format=3 uid="uid://svwjxlagth3p"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_275hm"]
 [ext_resource type="PackedScene" uid="uid://bktpg7gn5wnu6" path="res://scenes/card.tscn" id="1_tapcp"]
-[ext_resource type="Script" path="res://scenes/game.gd" id="1_woeg3"]
+[ext_resource type="PackedScene" uid="uid://d4dkuq8xqaf3q" path="res://scenes/game_hud.tscn" id="3_4ty64"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_woeg3")
+script = ExtResource("1_275hm")
 
 [node name="Card" parent="." instance=ExtResource("1_tapcp")]
 position = Vector2(960, 850)
@@ -17,3 +18,10 @@ position = Vector2(960, 850)
 
 [node name="PlayZone" type="Marker2D" parent="."]
 position = Vector2(1794, 524)
+
+[node name="GameHUD" parent="." instance=ExtResource("3_4ty64")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1

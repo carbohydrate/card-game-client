@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjgs1gu50ulev"]
+
+[ext_resource type="Texture2D" uid="uid://crks7b2ss4bam" path="res://assets/circle.png" id="1_5p7s8"]
+
+[node name="ResourceIcon" type="TextureRect"]
+texture = ExtResource("1_5p7s8")
+expand_mode = 2

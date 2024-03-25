@@ -12,6 +12,6 @@ func _on_decks_button_pressed():
 	self.visible = false
 	#self.queue_free()
 
-func _on_start_game_button_pressed():
+func _on_game_ready():
 	get_tree().root.add_child(game_scene)
 	queue_free()

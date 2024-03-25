@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2yvav33po2cm"]
+
+[ext_resource type="Script" path="res://scripts/start_game_button.gd" id="1_wt347"]
+
+[node name="StartGameButton" type="Button"]
+offset_right = 115.0
+offset_bottom = 31.0
+text = "START GAME!!"
+script = ExtResource("1_wt347")
+
+[node name="StartGameHTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="StartGameRetryHTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="StartGameTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="timeout" from="StartGameTimer" to="." method="_on_start_game_timer_timeout"]
