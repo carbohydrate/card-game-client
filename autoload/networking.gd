@@ -3,8 +3,8 @@ extends Node
 signal connected_to_server_success
 signal connected_to_server_failed(message: String)
 
-const SERVER_IP = '127.0.0.1'
-#const SERVER_IP = '172.232.7.60'
+const API_URL = 'http://localhost:3000'
+# const API_URL = '172.232.7.60'
 const PORT = 3000
 
 var session = ''
@@ -18,9 +18,8 @@ func on_connect_pressed(accountName: String, accountPass: String):
 		'username': accountName,
 		'password': accountPass,
 	}
-	#print(get_type(data_to_send))
 	var json = JSON.stringify(data_to_send)
-	var url = 'http://localhost:3000/session'
+	var url = API_URL + "/session"
 	var headers = ['Content-Type: application/json']
 	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json)
 	if error != OK:
@@ -47,14 +46,21 @@ func on_start_game_pressed(http_request: HTTPRequest):
 	}
 
 	var json = JSON.stringify(data_to_send)
-	var url = "http://localhost:3000/game/start"
+	var url = API_URL + "/game/start"
 	var headers = ["Content-Type: application/json", "Cookie: %s" % State.session]
 	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
 func on_start_game_timer_timeout(http_request: HTTPRequest):
-	var url = "http://localhost:3000/game/start/%s" % State.gameId
+	var url = API_URL + "/game/start/%s" % State.gameId
+	var headers = ["Cookie: %s" % State.session]
+	var error = http_request.request(url, headers, HTTPClient.METHOD_GET)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+func get_game_state(http_request: HTTPRequest):
+	var url = API_URL + "/game/state/%s" % State.gameId
 	var headers = ["Cookie: %s" % State.session]
 	var error = http_request.request(url, headers, HTTPClient.METHOD_GET)
 	if error != OK:
